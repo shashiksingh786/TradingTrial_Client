@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardSymbolComponent } from './views/dashboard-symbol/dashboard-symbol.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardSymbolComponent
   ],
   imports: [
     BrowserModule,
