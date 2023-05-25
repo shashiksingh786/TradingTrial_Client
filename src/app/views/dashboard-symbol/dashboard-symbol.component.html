@@ -1,1 +1,81 @@
-<p>dashboard-symbol works!</p>
+<div class="display-6 mb-3 mt-3">Dashboard</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Filters</h4>
+        <h6 class="text-muted mt-3">Search Symbol</h6>
+        <div class="d-flex" role="search">
+          <input class="form-control form-control-sm me-2" [(ngModel)]="symbolModal" type="search" placeholder="Search"
+            aria-label="Search">
+          <button class="btn btn-sm btn-outline-success" type="submit" (click)="searchSymbol()">Search</button>
+        </div>
+
+        <h6 class="text-muted mt-3"> Stock Universe</h6>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Nifty 50
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Nifty IT
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Nifty Bank
+          </label>
+        </div>
+
+        <h6 class="text-muted mt-3"> Industry</h6>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+          <option selected>Select Industry</option>
+          <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
+        </select>
+
+        <h6 class="text-muted mt-3"> Score</h6>
+        <input type="input" class="form-control form-control-sm">
+
+        <h6 class="text-muted mt-3"> Delivery( {{deliveryPercent}}%)</h6>
+        <input type="range" min="1" max="100" class="form-range" id="deliverypercent" (change)="rangeUpdate($event)"
+          value="{{deliveryPercent}}">
+
+        <h6 class="text-muted mt-3"> Avg Total Score</h6>
+        <input type="input" class="form-control form-control-sm">
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="table-responsive">
+      <table class="table caption-top">
+        <caption>Details as on Trading date <b>{{topList[0].TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Industry</th>
+            <th scope="col" class="text-end">Score</th>
+            <th scope="col" class="text-end">Avg Total Score</th>
+            <th scope="col" class="text-end">Delivery (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of topList;let i=index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.SYMBOL}}</td>
+            <td>{{item.INDUSTRY}}</td>
+            <td class="text-end">{{item.SCORE}}</td>
+            <td class="text-end">{{item.AVG_TOTAL_SCORE}}</td>
+            <td class="text-end">{{item.DELIVERABLE_PERCENT}}%</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
