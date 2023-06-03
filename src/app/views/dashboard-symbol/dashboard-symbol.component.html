@@ -31,9 +31,7 @@
           </label>
         </div>
 
-        <h6 class="text-muted mt-3"> Industry</h6>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
-          <option value="" selected>Select Industry</option>
+        <h6 class="text-muted mt-3"> Industry</h6>        
         <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
           <option value="" selected>Select Industry</option>
           <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
