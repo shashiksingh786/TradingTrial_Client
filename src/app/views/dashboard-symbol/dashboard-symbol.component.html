@@ -34,10 +34,13 @@
         <h6 class="text-muted mt-3"> Industry</h6>
         <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
           <option value="" selected>Select Industry</option>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
+          <option value="" selected>Select Industry</option>
           <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
         </select>
 
         <h6 class="text-muted mt-3"> Score</h6>
+        <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
         <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
 
         <h6 class="text-muted mt-3"> Delivery( {{deliveryPercent}}%)</h6>
@@ -53,7 +56,7 @@
   <div class="col-md-9">
     <div class="table-responsive">
       <table class="table caption-top">
-        <caption>Details as on Trading date <b>{{topList[0].TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
+        <caption>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
         <thead>
           <tr>
             <th scope="col">#</th>

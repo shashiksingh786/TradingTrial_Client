@@ -39,8 +39,17 @@ export class DashboardSymbolComponent implements OnInit {
 
   getTop10List() {
     const params = {
-      symbol: this.symbolModal
+      symbol: this.symbolModal,
+      nifty_50: this.nifty50,
+      nifty_it: this.niftyit,
+      nifty_bank: this.niftybank,
+      industry: this.industry,
+      score_filter: this.score,
+      avg_total_score_filter: this.avgTotalScore,
+      deliverable_percent_filter: this.deliveryPercent
+
     };
+    console.log(params);
     this.dashService.getDashboardData(params).subscribe(
       (data: any) => {
         console.log(data);
@@ -52,6 +61,8 @@ export class DashboardSymbolComponent implements OnInit {
 
   searchSymbol() {
     this.getTop10List();
+
+    
   }
 
 
