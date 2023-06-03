@@ -14,7 +14,7 @@ export class DashboardSymbolComponent implements OnInit {
   nifty_50=false;
   nifty_it=false;
   nifty_bank=false;
-  industry
+  industry='';
   constructor(private dashService: DashboardService) { }
 
   ngOnInit(): void {

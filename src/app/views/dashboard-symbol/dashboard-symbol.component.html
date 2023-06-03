@@ -67,7 +67,9 @@
         <tbody>
           <tr *ngFor="let item of topList;let i=index;">
             <th scope="row">{{i+1}}</th>
-            <td>{{item.SYMBOL}}</td>
+            <td>
+              <a class="btn-link">{{item.SYMBOL}}</a>
+            </td>
             <td>{{item.INDUSTRY}}</td>
             <td class="text-end">{{item.SCORE}}</td>
             <td class="text-end">{{item.AVG_TOTAL_SCORE}}</td>
