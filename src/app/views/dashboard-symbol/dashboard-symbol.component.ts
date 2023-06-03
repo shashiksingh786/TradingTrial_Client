@@ -11,6 +11,10 @@ export class DashboardSymbolComponent implements OnInit {
   industryList: any;
   topList: any = [];
   symbolModal = '';
+  nifty_50=false;
+  nifty_it=false;
+  nifty_bank=false;
+  industry
   constructor(private dashService: DashboardService) { }
 
   ngOnInit(): void {
