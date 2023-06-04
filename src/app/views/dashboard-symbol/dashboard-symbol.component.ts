@@ -8,16 +8,15 @@ import { DashboardService } from 'src/app/service/dashboard.service';
 })
 export class DashboardSymbolComponent implements OnInit {
   deliveryPercent = 0;
-  score = 0;
-  avgTotalScore = 0;
   industryList: any;
   topList: any = [];
   symbolModal = '';
-  nifty50 = false;
-  niftyit = false;
-  niftybank = false;
-  industry = '';
-
+  nifty_50=false;
+  nifty_it=false;
+  nifty_bank=false;
+  industry='';
+  avgtotalscore=0;
+  score=0;
   constructor(private dashService: DashboardService) { }
 
   ngOnInit(): void {
