@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { DashboardSymbolComponent } from './views/dashboard-symbol/dashboard-symbol.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SymbolDetailsComponent } from './views/symbol-details/symbol-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardSymbolComponent
+    DashboardSymbolComponent,
+    SymbolDetailsComponent
   ],
   imports: [
     BrowserModule,
