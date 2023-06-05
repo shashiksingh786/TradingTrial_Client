@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DashboardService } from 'src/app/service/dashboard.service';
 
 @Component({
@@ -11,13 +12,14 @@ export class DashboardSymbolComponent implements OnInit {
   industryList: any;
   topList: any = [];
   symbolModal = '';
-  nifty_50=false;
-  nifty_it=false;
-  nifty_bank=false;
-  industry='';
-  avgtotalscore=0;
-  score=0;
-  constructor(private dashService: DashboardService) { }
+  nifty_50 = false;
+  nifty_it = false;
+  nifty_bank = false;
+  industry = '';
+  avgtotalscore = 0;
+  score = 0;
+  loading = false;
+  constructor(private dashService: DashboardService, private router: Router) { }
 
   ngOnInit(): void {
     this.getIndustry();
@@ -38,32 +40,34 @@ export class DashboardSymbolComponent implements OnInit {
   }
 
   getTop10List() {
+    this.loading = true;
     const params = {
       symbol: this.symbolModal,
-      nifty_50: this.nifty50,
-      nifty_it: this.niftyit,
-      nifty_bank: this.niftybank,
+      nifty_50: this.nifty_50,
+      nifty_it: this.nifty_it,
+      nifty_bank: this.nifty_bank,
       industry: this.industry,
       score_filter: this.score,
-      avg_total_score_filter: this.avgTotalScore,
+      avg_total_score_filter: this.avgtotalscore,
       deliverable_percent_filter: this.deliveryPercent
-
     };
     console.log(params);
     this.dashService.getDashboardData(params).subscribe(
       (data: any) => {
+        this.loading = false;
         console.log(data);
         this.topList = data;
-
       }
     );
   }
 
   searchSymbol() {
     this.getTop10List();
-
-    
   }
-
+  gotodetails(item: any) {
+    this.score = item.SCORE;
+    this.avgtotalscore = item.AVG_TOTAL_SCORE;
+    this.symbolModal = item.SYMBOL;
+  }
 
 }

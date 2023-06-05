@@ -31,7 +31,7 @@
           </label>
         </div>
 
-        <h6 class="text-muted mt-3"> Industry</h6>        
+        <h6 class="text-muted mt-3"> Industry</h6>
         <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
           <option value="" selected>Select Industry</option>
           <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
@@ -39,11 +39,10 @@
 
         <h6 class="text-muted mt-3"> Score</h6>
         <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
-        <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
 
         <h6 class="text-muted mt-3"> Delivery( {{deliveryPercent}}%)</h6>
         <input type="range" min="1" max="100" class="form-range" id="deliverypercent" (change)="rangeUpdate($event)"
-        [(ngModel)]="deliveryPercent">
+          [(ngModel)]="deliveryPercent">
 
         <h6 class="text-muted mt-3"> Avg Total Score</h6>
         <input type="input" class="form-control form-control-sm" [(ngModel)]="avgtotalscore">
@@ -52,6 +51,9 @@
     </div>
   </div>
   <div class="col-md-9">
+    <div *ngIf="loading" class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <div class="table-responsive">
       <table class="table caption-top">
         <caption>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
@@ -69,7 +71,8 @@
           <tr *ngFor="let item of topList;let i=index;">
             <th scope="row">{{i+1}}</th>
             <td>
-              <a class="btn-link">{{item.SYMBOL}}</a>
+              <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#symbolmodal"
+                (click)="gotodetails(item)">{{item.SYMBOL}}</a>
             </td>
             <td>{{item.INDUSTRY}}</td>
             <td class="text-end">{{item.SCORE}}</td>
@@ -79,6 +82,41 @@
 
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="symbolmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="mb-3 me-3">
+          <label class="form-label fs-4">{{symbolModal}}</label>
+          <sup class="text-muted text-uppercase me-1">Symbol</sup>
+
+        </div>
+        <div class="mb-3 me-3">
+          <label class="form-label fs-4">{{score}}</label>
+          <sup class="text-muted text-uppercase me-1">Score</sup>
+
+        </div>
+        <div class="mb-3">
+          <label class="form-label fs-4">{{avgtotalscore}}</label>
+          <sup class="text-muted text-uppercase me-1">Avg Total Score</sup>
+
+        </div>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-symbol-details [avgtotalscore]="avgtotalscore" [score]="score"
+          [symbolModal]="symbolModal"></app-symbol-details>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

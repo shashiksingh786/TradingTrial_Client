@@ -1,20 +1,27 @@
-<p>Symbol Deatils</p>
+ 
 <div class="row">
     <div class="col-md-3">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Symbol: {{symbolModal}}</h2>
-                <div class="d-flex" role="search">
-                    <input class="form-control form-control-sm me-2" [(ngModel)]="symbolModal" type="search"
-                        placeholder="Search" aria-label="Search">
-                    <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
+                <div class="table-responsive">
+                    <table class="table table-bordered caption-top">
+                        <caption>Symbol details</caption>
+                        <thead>
+                            <th> # </th>
+                            <th> TQ/NT </th>
+                            <th> DEL% </th>
+                            <th> TTQ </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <h6 class="text-muted mt-3"> Score</h6>
-                <h2>{{score}}</h2>
-
-                <h6 class="text-muted mt-3"> Avg Total Score</h6>
-                <h2>{{avgtotalscore}}</h2>
 
             </div>
         </div>

@@ -5,7 +5,7 @@ import { SymbolDetailsComponent } from './views/symbol-details/symbol-details.co
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardSymbolComponent },
-  { path: 'symbol/:id', component: SymbolDetailsComponent }
+  { path: 'symbol', component: SymbolDetailsComponent }
 ];
 
 @NgModule({
