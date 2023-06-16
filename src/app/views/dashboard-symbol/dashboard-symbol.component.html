@@ -1,4 +1,8 @@
-<div class="display-6 mb-3 mt-3">Dashboard</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+  <a (click)="syncdata()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm cursor-pointer"><i
+      class="fas fa-sync fa-sm text-white-50"></i> Sync Data</a>
+</div>
 <div class="row">
   <div class="col-md-3">
     <div class="card">
@@ -8,7 +12,6 @@
         <div class="d-flex" role="search">
           <input class="form-control form-control-sm me-2" [(ngModel)]="symbolModal" type="search" placeholder="Search"
             aria-label="Search">
-          <button class="btn btn-sm btn-outline-success" type="submit" (click)="searchSymbol()">Search</button>
         </div>
 
         <h6 class="text-muted mt-3"> Stock Universe</h6>
@@ -32,31 +35,36 @@
         </div>
 
         <h6 class="text-muted mt-3"> Industry</h6>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
+        <select class="form-control form-control-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
           <option value="" selected>Select Industry</option>
           <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
         </select>
 
-        <h6 class="text-muted mt-3"> Score</h6>
+        <h6 class="text-muted mt-3"> Score (>={{score}})</h6>
         <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
 
-        <h6 class="text-muted mt-3"> Delivery( {{deliveryPercent}}%)</h6>
+        <h6 class="text-muted mt-3"> Delivery (>={{deliveryPercent}}%)</h6>
         <input type="range" min="1" max="100" class="form-range" id="deliverypercent" (change)="rangeUpdate($event)"
           [(ngModel)]="deliveryPercent">
 
-        <h6 class="text-muted mt-3"> Avg Total Score</h6>
+        <h6 class="text-muted mt-3"> Avg Total Score (>={{avgtotalscore}})</h6>
         <input type="input" class="form-control form-control-sm" [(ngModel)]="avgtotalscore">
 
+        <div class="d-grid gap-2 mt-3">
+          <button class="btn btn-success " type="submit" (click)="searchSymbol()">Search</button>
+          <button class="btn btn-warning ms-2" type="submit" (click)="clearmodal()">Reset</button>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-9">
-    <div *ngIf="loading" class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <div *ngIf="loading" class="d-flex align-items-center">
+      <strong>Loading...</strong>
+      <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
     </div>
+    <h4>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></h4>
     <div class="table-responsive">
-      <table class="table caption-top">
-        <caption>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
+      <table class="table caption-top" aria-describedby="nocaption">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -87,32 +95,63 @@
 </div>
 
 
-<div class="modal fade" id="symbolmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="symbolmodal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
-      <div class="modal-header">
-        <div class="mb-3 me-3">
-          <label class="form-label fs-4">{{symbolModal}}</label>
-          <sup class="text-muted text-uppercase me-1">Symbol</sup>
-
-        </div>
-        <div class="mb-3 me-3">
-          <label class="form-label fs-4">{{score}}</label>
-          <sup class="text-muted text-uppercase me-1">Score</sup>
-
-        </div>
-        <div class="mb-3">
-          <label class="form-label fs-4">{{avgtotalscore}}</label>
-          <sup class="text-muted text-uppercase me-1">Avg Total Score</sup>
-
-        </div>
-
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
       <div class="modal-body">
-        <app-symbol-details [avgtotalscore]="avgtotalscore" [score]="score"
-          [symbolModal]="symbolModal"></app-symbol-details>
+        <div class="row">
+          <div class="col-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body p-1">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      Symbol</div>
+                    <div class="h4 mb-0 font-weight-bold text-gray-800">{{symbolModalDet}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body p-1">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      Score</div>
+                    <div class="h4 mb-0 font-weight-bold text-gray-800">{{scoreDet}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body p-1">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      Avg Total Score</div>
+                    <div class="h4 mb-0 font-weight-bold text-gray-800">{{avgtotalscoreDet}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-symbol-details [avgtotalscore]="avgtotalscoreDet" [score]="scoreDet"
+          [symbolModal]="symbolModalDet"></app-symbol-details>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

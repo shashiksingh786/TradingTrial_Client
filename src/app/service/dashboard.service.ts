@@ -21,7 +21,11 @@ export class DashboardService {
     return this.http.get<any>(AppConstants.BaseUrl + 'gettoplist', this.httpOptions);
   }
 
-  getDashboardData(symbol: any): Observable<any> {
-    return this.http.post<any>(AppConstants.BaseUrl + 'dashboard', symbol, this.httpOptions);
+  getDashboardData(modal: any): Observable<any> {
+    return this.http.post<any>(AppConstants.BaseUrl + 'dashboard', modal, this.httpOptions);
+  }
+
+  getSymbolDetails(modal: any): Observable<any> {
+    return this.http.post<any>(AppConstants.BaseUrl + 'symboldetails', modal, this.httpOptions);
   }
 }

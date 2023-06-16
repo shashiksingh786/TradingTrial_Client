@@ -7,18 +7,24 @@ import { DashboardSymbolComponent } from './views/dashboard-symbol/dashboard-sym
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SymbolDetailsComponent } from './views/symbol-details/symbol-details.component';
+import { SplineChartsComponent } from './shared/charts/spline-charts/spline-charts.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardSymbolComponent,
-    SymbolDetailsComponent
+    SymbolDetailsComponent,
+    SplineChartsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TypeaheadModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

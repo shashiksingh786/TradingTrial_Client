@@ -19,11 +19,15 @@ export class DashboardSymbolComponent implements OnInit {
   avgtotalscore = 0;
   score = 0;
   loading = false;
+
+  scoreDet = 0;
+  avgtotalscoreDet = 0;
+  symbolModalDet = '';
   constructor(private dashService: DashboardService, private router: Router) { }
 
   ngOnInit(): void {
     this.getIndustry();
-    this.getTop10List();
+    // this.getTop10List();
   }
   rangeUpdate(val: any) {
     this.deliveryPercent = val.target.value;
@@ -65,9 +69,20 @@ export class DashboardSymbolComponent implements OnInit {
     this.getTop10List();
   }
   gotodetails(item: any) {
-    this.score = item.SCORE;
-    this.avgtotalscore = item.AVG_TOTAL_SCORE;
-    this.symbolModal = item.SYMBOL;
+    this.scoreDet = item.SCORE;
+    this.avgtotalscoreDet = item.AVG_TOTAL_SCORE;
+    this.symbolModalDet = item.SYMBOL;
+  }
+  clearmodal() {
+    this.symbolModal = '';
+    this.industry = '';
+    this.score = 0;
+    this.avgtotalscore = 0;
+    this.deliveryPercent = 0;
+  }
+  syncdata() {
+    this.clearmodal();
+    this.getTop10List();
   }
 
 }

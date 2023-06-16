@@ -1,23 +1,24 @@
- 
 <div class="row">
     <div class="col-md-3">
         <div class="card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Symbol Analysis</h6>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered caption-top">
-                        <caption>Symbol details</caption>
+                    <table class="table table-bordered" aria-describedby="Nocaption">
                         <thead>
-                            <th> # </th>
-                            <th> TQ/NT </th>
-                            <th> DEL% </th>
-                            <th> TTQ </th>
+                            <th class="text-center"> # </th>
+                            <th class="text-end"> TQ/NT </th>
+                            <th class="text-end"> DEL% </th>
+                            <th class="text-end"> TTQ </th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr *ngFor="let item of gridData">
+                                <td class="text-center">{{item.CATEGORY}}</td>
+                                <td class="text-end">{{item.TQ_NT}}</td>
+                                <td class="text-end">{{item.DEL_PERCENT}}</td>
+                                <td class="text-end">{{item.TTQ}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -26,7 +27,38 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9">
-
+    <div class="col-md-3">
+        <app-spline-charts chartId="closepricechart" seriesName="Close Price" chartTitle="Close Price Summary"
+            yaxisTitle="Close Price" [categoryData]="closePriceCategoryArr"
+            [seriesData]="closePriceValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="scorechart" seriesName="Score" chartTitle="Score Summary" yaxisTitle="Score"
+            [categoryData]="scoreCategoryArr" [seriesData]="scoreValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="avgtotalscorechart" seriesName="Avg Total Score"
+            chartTitle="Avg total Score Summary" yaxisTitle="Avg Total Score" [categoryData]="avgtotalscoreCategoryArr"
+            [seriesData]="avgtotalscoreValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="tqntscorechart" seriesName="TQ/NT Score" chartTitle="TQ/NT Score Summary"
+            yaxisTitle="TQ/NT Score" [categoryData]="tqntscoreCategoryArr"
+            [seriesData]="tqntscoreValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="ttqscorechart" seriesName="TTQ Score" chartTitle="TTQ Score Summary"
+            yaxisTitle="TTQ Score" [categoryData]="ttqscoreCategoryArr"
+            [seriesData]="ttqscoreValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="nmfscorechart" seriesName="NMF Score" chartTitle="NMF Score Summary"
+            yaxisTitle="NMF Score" [categoryData]="nmfscoreCategoryArr"
+            [seriesData]="nmfscoreValueArr"></app-spline-charts>
+    </div>
+    <div class="col-md-3">
+        <app-spline-charts chartId="delpercentscorechart" seriesName="Del Percent Score"
+            chartTitle="Del Percent Score Summary" yaxisTitle="DelPercent Score"
+            [categoryData]="delpercentscoreCategoryArr" [seriesData]="delpercentscoreValueArr"></app-spline-charts>
     </div>
 </div>
