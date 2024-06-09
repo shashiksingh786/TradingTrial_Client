@@ -4,12 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardSymbolComponent } from './views/dashboard-symbol/dashboard-symbol.component';
-import {  HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SymbolDetailsComponent } from './views/symbol-details/symbol-details.component';
 import { SplineChartsComponent } from './shared/charts/spline-charts/spline-charts.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     FormsModule,
+    DataTablesModule,
     HttpClientModule,
     AppRoutingModule,
     TypeaheadModule.forRoot(),

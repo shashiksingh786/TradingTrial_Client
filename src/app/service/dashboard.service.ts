@@ -4,28 +4,40 @@ import { AppConstants } from '@appconstants';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DashboardService {
-
   httpOptions = {
-    headers: AppConstants.Headers
+    headers: AppConstants.Headers,
   };
-  constructor(private http: HttpClient) {
-
-  }
+  routeUrl = 'api/TradingTrial/';
+  constructor(private http: HttpClient) {}
   getIndustryList(): Observable<any> {
-    return this.http.get<any>(AppConstants.BaseUrl + 'getIndustryList', this.httpOptions);
+    return this.http.get<any>(
+      AppConstants.BaseUrl + this.routeUrl + 'getIndustryList',
+      this.httpOptions
+    );
   }
   getTop10List(): Observable<any> {
-    return this.http.get<any>(AppConstants.BaseUrl + 'gettoplist', this.httpOptions);
+    return this.http.get<any>(
+      AppConstants.BaseUrl + this.routeUrl + 'gettoplist',
+      this.httpOptions
+    );
   }
 
   getDashboardData(modal: any): Observable<any> {
-    return this.http.post<any>(AppConstants.BaseUrl + 'dashboard', modal, this.httpOptions);
+    return this.http.post<any>(
+      AppConstants.BaseUrl + this.routeUrl +'dashboard',
+      modal,
+      this.httpOptions
+    );
   }
 
   getSymbolDetails(modal: any): Observable<any> {
-    return this.http.post<any>(AppConstants.BaseUrl + 'symboldetails', modal, this.httpOptions);
+    return this.http.post<any>(
+      AppConstants.BaseUrl + this.routeUrl +'symboldetails',
+      modal,
+      this.httpOptions
+    );
   }
 }

@@ -44,33 +44,33 @@ export class SymbolDetailsComponent implements OnChanges {
     }
     this.dashService.getSymbolDetails(params).subscribe(
       (res: any) => {
-        this.gridData = res[0];
+        this.gridData =res.Table; // res[0];
 
-        const resultClosePrice = this.getchartdataarrange(res[1], 'CLOSE_PRICE'); 
+        const resultClosePrice = this.getchartdataarrange(res.Table1, 'CLOSE_PRICE'); 
         this.closePriceCategoryArr = resultClosePrice[0];
         this.closePriceValueArr = resultClosePrice[1];
 
-        const resultScore = this.getchartdataarrange(res[2], 'SCORE'); 
+        const resultScore = this.getchartdataarrange(res.Table2, 'SCORE'); 
         this.scoreCategoryArr = resultScore[0];
         this.scoreValueArr = resultScore[1];
 
-        const resultavgtotalscore = this.getchartdataarrange(res[3], 'AVG_TOTAL_SCORE'); 
+        const resultavgtotalscore = this.getchartdataarrange(res.Table3, 'AVG_TOTAL_SCORE'); 
         this.avgtotalscoreCategoryArr = resultavgtotalscore[0];
         this.avgtotalscoreValueArr = resultavgtotalscore[1];
 
-        const resulttqntscore = this.getchartdataarrange(res[4], 'TQNT_SCORE'); 
+        const resulttqntscore = this.getchartdataarrange(res.Table4, 'TQNT_SCORE'); 
         this.tqntscoreCategoryArr = resulttqntscore[0];
         this.tqntscoreValueArr = resulttqntscore[1];
 
-        const resultTTQscore = this.getchartdataarrange(res[5], 'TTQ_SCORE'); 
+        const resultTTQscore = this.getchartdataarrange(res.Table5, 'TTQ_SCORE'); 
         this.ttqscoreCategoryArr = resultTTQscore[0];
         this.ttqscoreValueArr = resultTTQscore[1];
 
-        const resultNMFscore = this.getchartdataarrange(res[6], 'NMF_SCORE'); 
+        const resultNMFscore = this.getchartdataarrange(res.Table6, 'NMF_SCORE'); 
         this.nmfscoreCategoryArr = resultNMFscore[0];
         this.nmfscoreValueArr = resultNMFscore[1];
 
-        const resultDelPercentscore = this.getchartdataarrange(res[7], 'DEL_PERCENT_SCORE'); 
+        const resultDelPercentscore = this.getchartdataarrange(res.Table7, 'DEL_PERCENT_SCORE'); 
         this.delpercentscoreCategoryArr = resultDelPercentscore[0];
         this.delpercentscoreValueArr = resultDelPercentscore[1];
 

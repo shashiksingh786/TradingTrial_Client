@@ -4,14 +4,16 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Symbol Analysis</h6>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-bordered" aria-describedby="Nocaption">
-                        <thead>
+                    <table class="table table-sm table-bordered table-striped" aria-describedby="Nocaption">
+                        <thead class="table-secondary">
+                            <tr>
                             <th class="text-center"> # </th>
                             <th class="text-end"> TQ/NT </th>
                             <th class="text-end"> DEL% </th>
                             <th class="text-end"> TTQ </th>
+                        </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of gridData">
