@@ -1,11 +1,11 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+  <h1 class="h3 mb-0 text-gray-800">Trading Dashbaord</h1>
 </div>
 <div class="row">
   <div class="col-md-3">
     <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Filters</h4>
+      <div class="card-body p-2">
+        <h4 class="card-title text-muted">Filters</h4>
         <h6 class="text-muted mt-3">Search Symbol</h6>
         <div class="d-flex" role="search">
           <input
@@ -133,7 +133,7 @@
           >
             Search
           </button>
-          <button class="btn btn-warning" type="submit" (click)="clearmodal()">
+          <button class="btn btn-secondary" type="submit" (click)="clearmodal()">
             Reset
           </button>
         </div>
@@ -171,7 +171,7 @@
         />
       </symbol>
     </svg>
-    <div class="alert alert-primary d-flex align-items-center" role="alert">
+    <div class="alert alert-secondary d-flex align-items-center" role="alert">
       <svg
         class="bi flex-shrink-0 me-2"
         width="24"
@@ -188,7 +188,7 @@
         <button
           type="button"
           (click)="syncdata()"
-          class="ms-5 btn btn-warning shadow-sm cursor-pointer"
+          class="ms-5 btn btn-light border shadow-sm cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,7 @@
       <div>
         <button
           type="button"          
-          class="ms-5 btn btn-primary shadow-sm cursor-pointer"
+          class="ms-5 btn btn-secondary shadow-sm cursor-pointer"
           data-bs-toggle="modal"
           data-bs-target="#uploadmodal"
         >
