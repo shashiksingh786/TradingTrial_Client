@@ -11,6 +11,6 @@ export class AppConstants {
         return new HttpHeaders({ 'Content-Type': 'application/json' });
     }
     public static get BaseUrl(): string {
-        return 'https://localhost:44381/'; //'http://127.0.0.1:8000/';
+        return 'http://localhost:7886/';  
     }
 }

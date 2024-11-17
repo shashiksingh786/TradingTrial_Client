@@ -16,7 +16,7 @@ export class FileUploadService {
 
     const req = new HttpRequest(
       'POST',
-      AppConstants.BaseUrl + 'upload',
+      AppConstants.BaseUrl + 'api/TradingTrial/upload',
       formdata,
       {
         reportProgress: true,

@@ -133,10 +133,14 @@ export class DashboardSymbolComponent implements OnInit, OnDestroy {
 
         this.uploadService.uploadFile(this.currentFile).subscribe({
           next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
+            if(event==='SUCCESS'){
+              this.currentFile = undefined;
+              console.log('File upload success');
+            }
+            else if (event.type === HttpEventType.UploadProgress) {
               this.progress = Math.round((100 * event.loaded) / event.total);
             } else if (event instanceof HttpResponse) {
-              this.message = event.body.message;
+              this.message = event.body.status=="SUCCESS"?"File Uploaded Successfully":event.body.status;
             }
           },
           error: (err: any) => {
