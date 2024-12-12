@@ -1,61 +1,236 @@
-<div class="display-6 mb-3 mt-3">Dashboard</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Trading Dashbaord</h1>
+</div>
 <div class="row">
   <div class="col-md-3">
     <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Filters</h4>
+      <div class="card-body p-2">
+        <h4 class="card-title text-muted">Filters</h4>
         <h6 class="text-muted mt-3">Search Symbol</h6>
         <div class="d-flex" role="search">
-          <input class="form-control form-control-sm me-2" [(ngModel)]="symbolModal" type="search" placeholder="Search"
-            aria-label="Search">
-          <button class="btn btn-sm btn-outline-success" type="submit" (click)="searchSymbol()">Search</button>
+          <input
+            class="form-control form-control-sm me-2"
+            [(ngModel)]="symbolModal"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
         </div>
 
-        <h6 class="text-muted mt-3"> Stock Universe</h6>
+        <h6 class="text-muted mt-3">Condition</h6>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [(ngModel)]="nifty_50">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            [(ngModel)]="tq_nt_condition"
+          />
+          <!-- <label class="form-check-label" for="flexCheckDefault"> -->
+          <span
+            class="badge bg-light text-secondary border text-wrap fw-normal w-75"
+          >
+            <b>TQ_NT</b>
+            3D > 5D > 8D > 13D
+          </span>
+          AND
+          <span
+            class="badge bg-light text-secondary border text-wrap fw-normal w-75"
+          >
+            <b>DEL_PERCENT</b>
+            3D > 5D > 8D > 13D
+          </span>
+          AND
+          <span
+            class="badge bg-light text-secondary border text-wrap fw-normal w-75"
+          >
+            <b>TTQ</b>
+            3D > 5D > 8D > 13D
+          </span>
+
+          <!-- </label> -->
+        </div>
+
+        <h6 class="text-muted mt-3">Stock Universe</h6>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            [(ngModel)]="nifty_50"
+          />
           <label class="form-check-label" for="flexCheckDefault">
             Nifty 50
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [(ngModel)]="nifty_it">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            [(ngModel)]="nifty_it"
+          />
           <label class="form-check-label" for="flexCheckDefault">
             Nifty IT
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" [(ngModel)]="nifty_bank">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            [(ngModel)]="nifty_bank"
+          />
           <label class="form-check-label" for="flexCheckDefault">
             Nifty Bank
           </label>
         </div>
 
-        <h6 class="text-muted mt-3"> Industry</h6>        
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="industry">
+        <h6 class="text-muted mt-3">Industry</h6>
+        <select
+          class="form-control form-control-sm"
+          aria-label=".form-select-sm example"
+          [(ngModel)]="industry"
+        >
           <option value="" selected>Select Industry</option>
-          <option *ngFor="let item of industryList" value="{{item?.industry}}">{{item?.industry}}</option>
+          <option
+            *ngFor="let item of industryList"
+            value="{{ item?.INDUSTRY }}"
+          >
+            {{ item?.INDUSTRY }}
+          </option>
         </select>
 
-        <h6 class="text-muted mt-3"> Score</h6>
-        <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
-        <input type="input" class="form-control form-control-sm" [(ngModel)]="score">
+        <h6 class="text-muted mt-3">Score (>={{ score }})</h6>
+        <input
+          type="input"
+          class="form-control form-control-sm"
+          [(ngModel)]="score"
+        />
 
-        <h6 class="text-muted mt-3"> Delivery( {{deliveryPercent}}%)</h6>
-        <input type="range" min="1" max="100" class="form-range" id="deliverypercent" (change)="rangeUpdate($event)"
-        [(ngModel)]="deliveryPercent">
+        <h6 class="text-muted mt-3">Delivery (>={{ deliveryPercent }}%)</h6>
+        <input
+          type="range"
+          min="1"
+          max="100"
+          class="form-range"
+          id="deliverypercent"
+          (change)="rangeUpdate($event)"
+          [(ngModel)]="deliveryPercent"
+        />
 
-        <h6 class="text-muted mt-3"> Avg Total Score</h6>
-        <input type="input" class="form-control form-control-sm" [(ngModel)]="avgtotalscore">
+        <h6 class="text-muted mt-3">Avg Total Score (>={{ avgtotalscore }})</h6>
+        <input
+          type="input"
+          class="form-control form-control-sm"
+          [(ngModel)]="avgtotalscore"
+        />
 
+        <div class="d-grid gap-2 mt-3">
+          <button
+            class="btn btn-success"
+            type="submit"
+            (click)="searchSymbol()"
+          >
+            Search
+          </button>
+          <button class="btn btn-secondary" type="submit" (click)="clearmodal()">
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-9">
+    <div *ngIf="loading" class="d-flex align-items-center">
+      <strong>Loading...</strong>
+      <div
+        class="spinner-border ms-auto"
+        role="status"
+        aria-hidden="true"
+      ></div>
+    </div>
+    <!-- <h4>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></h4> -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+        />
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+        />
+      </symbol>
+      <symbol
+        id="exclamation-triangle-fill"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+        />
+      </symbol>
+    </svg>
+    <div class="alert alert-secondary d-flex align-items-center" role="alert">
+      <svg
+        class="bi flex-shrink-0 me-2"
+        width="24"
+        height="24"
+        role="img"
+        aria-label="Info:"
+      >
+        <use xlink:href="#info-fill" />
+      </svg>
+      <div>
+        Details as on Trading date
+        <b>{{ topList[0]?.TRADING_DATE | date : "dd, MMM, yyyy" }}</b>
+
+        <button
+          type="button"
+          (click)="syncdata()"
+          class="ms-5 btn btn-light border shadow-sm cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-repeat"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+            />
+          </svg>
+          Sync Data & Summarize
+        </button>
+      </div>
+
+      <div>
+        <button
+          type="button"          
+          class="ms-5 btn btn-secondary shadow-sm cursor-pointer"
+          data-bs-toggle="modal"
+          data-bs-target="#uploadmodal"
+        >
+          Upload Data
+        </button>
+      </div>
+    </div>
     <div class="table-responsive">
-      <table class="table caption-top">
-        <caption>Details as on Trading date <b>{{topList[0]?.TRADING_DATE|date:'dd, MMM, yyyy'}}</b></caption>
-        <thead>
+      <table
+        id="dtlist"
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="table table-sm table-bordered table-striped caption-top"
+        aria-describedby="nocaption"
+      >
+        <thead class="table-secondary">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Symbol</th>
@@ -66,19 +241,132 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of topList;let i=index;">
-            <th scope="row">{{i+1}}</th>
+          <tr *ngFor="let item of topList; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
             <td>
-              <a class="btn-link">{{item.SYMBOL}}</a>
+              <a
+                class="btn btn-link"
+                data-bs-toggle="modal"
+                data-bs-target="#symbolmodal"
+                (click)="gotodetails(item)"
+                >{{ item.SYMBOL }}</a
+              >
             </td>
-            <td>{{item.INDUSTRY}}</td>
-            <td class="text-end">{{item.SCORE}}</td>
-            <td class="text-end">{{item.AVG_TOTAL_SCORE}}</td>
-            <td class="text-end">{{item.DELIVERABLE_PERCENT}}%</td>
+            <td>{{ item.INDUSTRY }}</td>
+            <td class="text-end">{{ item.SCORE }}</td>
+            <td class="text-end">{{ item.AVG_TOTAL_SCORE }}</td>
+            <td class="text-end">{{ item.DELIVERABLE_PERCENT }}%</td>
           </tr>
-
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="symbolmodal"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="position-relative">
+          <div class="d-inline p-2 bg-primary text-white me-2">
+            <small class="me-1">SYMBOL</small>
+            <span class="fs-4">{{ symbolModalDet }}</span>
+          </div>
+          <div class="d-inline p-2 bg-warning text-white me-2">
+            <small class="me-1">SCORE</small>
+            <span class="fs-4">{{ scoreDet }}</span>
+          </div>
+          <div class="d-inline p-2 bg-info text-white">
+            <small class="me-1">AVG TOTAL SCORE</small>
+            <span class="fs-4">{{ avgtotalscoreDet }}</span>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-symbol-details
+          [avgtotalscore]="avgtotalscoreDet"
+          [score]="scoreDet"
+          [symbolModal]="symbolModalDet"
+        ></app-symbol-details>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="uploadmodal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload Data</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Upload File :</p>
+        <div class="input-group mb-3">
+          <input
+            type="file"
+            class="form-control"
+            id="inputGroupFile01"
+            (change)="selectFile($event)"
+          />
+        </div>
+        <div *ngIf="currentFile" class="progress my-3">
+          <div
+            class="progress-bar progress-bar-info"
+            role="progressbar"
+            attr.aria-valuenow="{{ progress }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: progress + '%' }"
+          >
+            {{ progress }}%
+          </div>
+        </div>
+        <div *ngIf="message" class="alert alert-secondary" role="alert">
+          {{ message }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!selectedFiles"
+          (click)="upload()"
+        >
+          Upload
+        </button>
+      </div>
     </div>
   </div>
 </div>
